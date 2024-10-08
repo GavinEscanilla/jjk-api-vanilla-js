@@ -148,7 +148,8 @@ addAudioInteraction('gojo', 'audio/Voicy_gojo saturo .mp3');
 addAudioInteraction('yuta', 'audio/it’s-pure-love-(yuta-and-rika-vs-geto)-made-with-Voicemod.mp3');
       select.addEventListener('change', () => {
         const selectedValue = select.value;
-        if(selectedValue === 'none') {
+        if(selectedValue === 'all') {
+           
           renderCharacters(jjk);
         }else if(selectedValue === 'grade') {
           const sortedCharacters = [...jjk].sort((a, b) => gradeOrder.indexOf(a.grade) - gradeOrder.indexOf(b.grade));
