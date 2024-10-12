@@ -119,6 +119,7 @@ const renderCharacters = (characters) => {
     container.innerHTML = '';
     characters.forEach(character => {
         const characterElement = document.createElement('div');
+        characterElement.id = `${character.name}`;
         characterElement.classList.add('jjk-info');
         characterElement.innerHTML = `
             <h2>${character.name}</h2>
@@ -128,16 +129,25 @@ const renderCharacters = (characters) => {
             <p>Grade: ${character.grade}</p>
         `;
         container.appendChild(characterElement);
-        
-    });
+    });   
 }
 renderCharacters(jjk);
-const nobara = document.getElementById('nobara');
-const nobara_audio = new Audio('audio/you-drop-even-one-of-those-bags-and-ill-kill-you-101soundboards.mp3');
-     nobara.addEventListener('mouseenter', () => {
-        nobara_audio.play();
-     });
-     nobara.addEventListener('mouseleave', () => {
+
+      select.addEventListener('change', () => {
+        const selectedValue = select.value;
+        if(selectedValue === 'all') {
+           
+          renderCharacters(jjk);
+        }else if(selectedValue === 'grade') {
+          const sortedCharacters = [...jjk].sort((a, b) => gradeOrder.indexOf(a.grade) - gradeOrder.indexOf(b.grade));
+          renderCharacters(sortedCharacters);
+        } else if(selectedValue === 'special grade') {
+          const filteredCharacters = jjk.filter(character => character.grade === 'special grade');
+          renderCharacters(filteredCharacters);
+        }
+        
+      })
+      nobara.addEventListener('mouseleave', () => {
         nobara_audio.pause();
         nobara_audio.currentTime = 0;
      });
@@ -159,19 +169,4 @@ const gojo_audio = new Audio('audio/Voicy_gojo saturo .mp3');
         yuta_audio.pause();
         yuta_audio.currentTime = 0;
      });
-
-      select.addEventListener('change', () => {
-        const selectedValue = select.value;
-        if(selectedValue === 'all') {
-           
-          renderCharacters(jjk);
-        }else if(selectedValue === 'grade') {
-          const sortedCharacters = [...jjk].sort((a, b) => gradeOrder.indexOf(a.grade) - gradeOrder.indexOf(b.grade));
-          renderCharacters(sortedCharacters);
-        } else if(selectedValue === 'special grade') {
-          const filteredCharacters = jjk.filter(character => character.grade === 'special grade');
-          renderCharacters(filteredCharacters);
-        }
-        
-      })
      
