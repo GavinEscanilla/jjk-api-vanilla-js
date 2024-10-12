@@ -113,7 +113,18 @@ const  select = document.getElementById('select');
       ];
       const gradeOrder = ['special grade', '1', 'semi-1', '2', 'semi-2', '3', '4'];
       
+      const addAudioInteraction = (characterId, audioPath) => {
+        const characterElement = document.getElementById(characterId);
+        const audio = new Audio(audioPath);
     
+        if (characterElement) {
+            characterElement.addEventListener('mouseenter', () => audio.play());
+            characterElement.addEventListener('mouseleave', () => {
+                audio.pause();
+                audio.currentTime = 0;
+            });
+        }
+    };
 
 const renderCharacters = (characters) => {
     container.innerHTML = '';
@@ -132,7 +143,9 @@ const renderCharacters = (characters) => {
     });   
 }
 renderCharacters(jjk);
-
+addAudioInteraction('nobara', 'audio/you-drop-even-one-of-those-bags-and-ill-kill-you-101soundboards.mp3');
+addAudioInteraction('gojo', 'audio/Voicy_gojo saturo .mp3');
+addAudioInteraction('yuta', 'audio/it’s-pure-love-(yuta-and-rika-vs-geto)-made-with-Voicemod.mp3');
       select.addEventListener('change', () => {
         const selectedValue = select.value;
         if(selectedValue === 'all') {
@@ -147,26 +160,5 @@ renderCharacters(jjk);
         }
         
       })
-      nobara.addEventListener('mouseleave', () => {
-        nobara_audio.pause();
-        nobara_audio.currentTime = 0;
-     });
-const gojo = document.getElementById('gojo');
-const gojo_audio = new Audio('audio/Voicy_gojo saturo .mp3');
-     gojo.addEventListener('mouseenter', () => {
-        gojo_audio.play();
-     });
-     gojo.addEventListener('mouseleave', () => {
-        gojo_audio.pause();
-        gojo_audio.currentTime = 0;
-     });
-     const yuta = document.getElementById('yuta');
-     const yuta_audio = new Audio('audio/it’s-pure-love-(yuta-and-rika-vs-geto)-made-with-Voicemod.mp3');
-     yuta.addEventListener('mouseenter', () => {
-        yuta_audio.play();
-     });
-     yuta.addEventListener('mouseleave', () => {
-        yuta_audio.pause();
-        yuta_audio.currentTime = 0;
-     });
+     
      
